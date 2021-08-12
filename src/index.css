@@ -44,3 +44,18 @@ code {
 .searchForm .formItem{
   margin-right:20px;
 }
+.cityItem{
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+.cityItem .delete{
+  padding:5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.cityItem .delete:hover{
+  background-color: rgba(218, 216, 216, 0.438);
+}

@@ -7,42 +7,54 @@ import Alert from "@material-ui/lab/Alert";
 import useCityList from "../../Hooks/useCityList";
 import CityInfo from "../CityInfo";
 import Weather from "../Weather";
+import { AiFillDelete } from "react-icons/ai";
+import { IconContext } from "react-icons";
 import { getCityCode } from "../../Utilities/utilities";
-import { useWeatherStateContext, useWeatherDispatchContext } from "../../WeatherContext";
+import {
+  useWeatherStateContext,
+  useWeatherDispatchContext,
+} from "../../WeatherContext";
 
 const CityListItem = React.memo(
-  ({ city, countryCode, weather, eventOnClickCity }) => {
+  ({ city, countryCode, weather, eventOnClickCity, eventOnClickDelete }) => {
     return (
-      <ListItem button onClick={() => eventOnClickCity(city, countryCode)}>
-        <Grid container justifyContent="center" alignItems="center">
-          <Grid item md={9} xs={12}>
-            <CityInfo city={city} countryCode={countryCode} />
+      <div className='cityItem'>
+        <ListItem button onClick={() => eventOnClickCity(city, countryCode)}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item md={6} xs={12}>
+              <CityInfo city={city} countryCode={countryCode} />
+            </Grid>
+            <Grid item md={3} xs={12}>
+              <Weather
+                temperature={weather && weather.temperature}
+                state={weather && weather.state}
+              />
+            </Grid>
           </Grid>
-          <Grid item md={3} xs={12}>
-            <Weather
-              temperature={weather && weather.temperature}
-              state={weather && weather.state}
-            />
-          </Grid>
-        </Grid>
-      </ListItem>
+        </ListItem>
+        <IconContext.Provider value={{ size: "2em" }}>
+          <AiFillDelete className="delete" onClick={() => eventOnClickDelete(city)}/>
+        </IconContext.Provider>
+      </div>
     );
   }
 );
 
-const renderCityAndCountry = (eventOnClickCity) => (cityCountry, weather) => {
+const renderCityAndCountry = (eventOnClickCity,) => (cityCountry, weather, eventOnClickDelete,) => {
   const { city, countryCode } = cityCountry;
   return (
     <CityListItem
       key={getCityCode(city, countryCode)}
       eventOnClickCity={eventOnClickCity}
+      eventOnClickDelete={eventOnClickDelete}
       weather={weather}
       {...cityCountry}
+      city={city}
     />
   );
 };
 
-const CityList = ({ cities, onClickCity }) => {
+const CityList = ({ cities, onClickCity, eventOnClickDelete }) => {
   const actions = useWeatherDispatchContext();
   const data = useWeatherStateContext();
   const { allWeather } = data;
@@ -55,13 +67,16 @@ const CityList = ({ cities, onClickCity }) => {
           {error}
         </Alert>
       )}
+    
       <List>
         {cities.map((cityAndCountry) =>
           renderCityAndCountry(onClickCity)(
             cityAndCountry,
             allWeather[
               getCityCode(cityAndCountry.city, cityAndCountry.countryCode)
-            ]
+            ],
+            eventOnClickDelete,
+            cityAndCountry.city
           )
         )}
       </List>

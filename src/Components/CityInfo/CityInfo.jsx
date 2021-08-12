@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 const CityInfo =({city, countryCode}) => {
     return (
         <>
-            <Typography display="inline" variant="h4">{city}, {countryCode}</Typography>
+            <Typography display="inline" variant="h4">{city}  {countryCode}</Typography>
                
             
         </>
