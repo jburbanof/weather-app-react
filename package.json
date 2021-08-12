@@ -2,6 +2,7 @@
   "name": "react-weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://jburbanof.github.io/weather-app-react/",
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "convert-units": "^2.3.4",
+    "gh-pages": "^3.2.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -26,6 +28,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pahes -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
