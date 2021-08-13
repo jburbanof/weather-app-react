@@ -28,19 +28,19 @@ const MainPage = ({ actions, data }) => {
     );
   };
   useEffect(() => {
-        let data= localStorage.getItem('cityCountry')
-        console.log(data)
-        if (data){
-            setCityCountry(JSON.parse(data))
-        }else{
-           setCityCountry([{city:'Bogotá', countryCode: 'CO'}]) 
-           console.log('test',cityCountry)
-        }
-        
-  },[cityCountry])
+    let data = JSON.parse(localStorage.getItem("cityCountry"));
+    
+
+    if (data.length === 0) {
+      setCityCountry([{ city: "Bogotá", countryCode: "CO" }]);
+      console.log("test", cityCountry);
+    } else {
+      setCityCountry(data);
+    }
+  },[]);
   useEffect(() => {
     localStorage.setItem("cityCountry", JSON.stringify(cityCountry));
-  }, [cityCountry]);
+  });
 
   return (
     <AppFrame>
