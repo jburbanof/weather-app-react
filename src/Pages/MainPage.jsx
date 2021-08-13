@@ -31,11 +31,10 @@ const MainPage = ({ actions, data }) => {
     let data = JSON.parse(localStorage.getItem("cityCountry"));
     
 
-    if (data.length === 0) {
-      setCityCountry([{ city: "Bogotá", countryCode: "CO" }]);
-      console.log("test", cityCountry);
-    } else {
+    if (data) {
       setCityCountry(data);
+    } else {
+      setCityCountry([{ city: "Bogotá", countryCode: "CO" }]);
     }
   },[]);
   useEffect(() => {
