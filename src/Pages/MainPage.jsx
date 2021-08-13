@@ -37,7 +37,7 @@ const MainPage = ({ actions, data }) => {
            console.log('test',cityCountry)
         }
         
-  },[])
+  },[cityCountry])
   useEffect(() => {
     localStorage.setItem("cityCountry", JSON.stringify(cityCountry));
   }, [cityCountry]);
